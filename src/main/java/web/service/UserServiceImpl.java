@@ -1,6 +1,7 @@
 package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDao;
@@ -10,11 +11,11 @@ import java.util.List;
 
 @Repository
 public class UserServiceImpl implements UserService {
+
     private final UserDao userDao;
 
-
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(@Qualifier("jpaUserDaoImpl")UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
         userDao.addUser(user);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public User getUserById(long id) {
         return userDao.getUserById(id);

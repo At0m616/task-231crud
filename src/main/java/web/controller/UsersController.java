@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
-import java.util.List;
 
 
 @Controller
@@ -25,18 +24,17 @@ public class UsersController {
     }
     @GetMapping("/users")
     public String getAllUsers(Model model){
-        List<User> list = userService.getAllUsers();
-        model.addAttribute("listU", list);
-
+        model.addAttribute("listU", userService.getAllUsers());
         return "main-users";
     }
 
     @GetMapping("/users/new")
     public String newUser(@ModelAttribute("user") User user){
-        return "new";
+        return "new-user";
     }
+
     @PostMapping("/users/new")
-    public String create(@ModelAttribute("user") User user){
+    public String createNewUser(@ModelAttribute("user") User user){
         userService.addUser(user);
         return "redirect:/users";
     }
@@ -55,7 +53,6 @@ public class UsersController {
     }
     @PostMapping("/users/{id}/edit")
     public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id){
-
         userService.updateUser(user);
         return "redirect:/users";
     }
@@ -63,7 +60,7 @@ public class UsersController {
     @GetMapping("/users/{id}")
     public String userData(@PathVariable("id") int id, Model model){
         model.addAttribute("user", userService.getUserById(id));
-        return "show-one";
+        return "show-one-user";
     }
 
 }

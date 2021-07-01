@@ -14,15 +14,15 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "e_mail")
-    private String Email;
+    private String email;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String Email) {
+    public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.Email = Email;
+        this.email = email;
     }
 
     public Long getId() {
@@ -50,11 +50,11 @@ public class User {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String eMail) {
-        this.Email = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -65,12 +65,12 @@ public class User {
         return id.equals(user.id)
                 && firstName.equals(user.firstName)
                 && lastName.equals(user.lastName)
-                && Email.equals(user.Email);
+                && email.equals(user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, Email);
+        return Objects.hash(id, firstName, lastName, email);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class User {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", Email='" + Email + '\'' +
+                ", Email='" + email + '\'' +
                 '}';
     }
 }
